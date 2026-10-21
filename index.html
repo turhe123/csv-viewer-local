@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- SEO:START — the builder rewrites title / description / keywords for search (see CLAUDE.md) -->
+  <title>Large CSV Viewer Online – Open, Search and Sort Big CSV Files</title>
+  <meta name="description" content="Open large CSV and TSV files in your browser. Sort, filter and search hundreds of thousands of rows, no Excel, no upload, no row limit. Free and works offline.">
+  <meta name="keywords" content="csv viewer online, open large csv file, csv file reader, view csv without excel, csv viewer with search and filter, open csv more than 1 million rows, tsv viewer, big csv file viewer">
+  <!-- SEO:END -->
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e0f14" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://turhe123.github.io/csv-viewer-local/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Large CSV Viewer and Search – Free, Private, In Your Browser">
+  <meta property="og:description" content="Open big CSV files in your browser, sort, filter and search rows quickly, with nothing uploaded. Free and open source, nothing is uploaded, works offline.">
+  <meta property="og:url" content="https://turhe123.github.io/csv-viewer-local/">
+  <meta property="og:image" content="https://turhe123.github.io/csv-viewer-local/docs/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Large CSV Viewer and Search">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Large CSV Viewer and Search – Free, Private, In Your Browser">
+  <meta name="twitter:description" content="Open big CSV files in your browser, sort, filter and search rows quickly, with nothing uploaded. Free and open source, nothing is uploaded, works offline.">
+  <meta name="twitter:image" content="https://turhe123.github.io/csv-viewer-local/docs/og.png">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Large CSV Viewer and Search",
+    "alternateName": "Large CSV Viewer and Search – Free, Private, In Your Browser",
+    "description": "Open big CSV files in your browser, sort, filter and search rows quickly, with nothing uploaded. Free and open source, nothing is uploaded, works offline.",
+    "url": "https://turhe123.github.io/csv-viewer-local/",
+    "image": "https://turhe123.github.io/csv-viewer-local/docs/og.png",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript. Works offline after the first visit.",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "license": "https://opensource.org/licenses/MIT",
+    "softwareVersion": "1.0.0",
+    "author": { "@type": "Person", "name": "Or Davidai Bachar", "url": "https://github.com/turhe123" },
+    "sameAs": ["https://github.com/turhe123/csv-viewer-local"]
+  }
+  </script>
+  <script src="vendor/papaparse/papaparse.min.js" defer></script>
+  <!-- Page views are counted with GoatCounter: no cookies, no personal data, open source. -->
+  <script data-goatcounter="https://turhe123.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#tool">Skip to the tool</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="./" aria-label="Large CSV Viewer and Search home">
+        <img class="brand__icon" src="icon.svg" alt="" width="28" height="28">
+        <span class="brand__name">Large CSV Viewer and Search</span>
+      </a>
+      <nav class="site-nav" aria-label="Page">
+        <a href="#how">How it works</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/turhe123/csv-viewer-local" rel="noopener">GitHub</a>
+        <a href="https://turhe123.github.io/web-tools/" rel="noopener" class="site-nav__more">More tools</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero container">
+      <!-- HERO:START — the builder may refine the headline and promise; keep the trust badges -->
+      <h1 class="hero__title">Large CSV Viewer and Search</h1>
+      <p class="hero__lead">Open big CSV files in your browser, sort, filter and search rows quickly, with nothing uploaded.</p>
+      <!-- HERO:END -->
+      <ul class="badges" aria-label="Why this tool is safe to use">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Runs in your browser, files never leave your device</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 16 0 8 8 0 0 0-16 0z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Free, open source, no account, no ads</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Works offline after the first visit</li>
+      </ul>
+    </section>
+
+    <section class="container" id="tool" aria-labelledby="tool-title">
+      <div class="tool-card">
+        <!-- TOOL:START — the builder replaces everything between these markers with the real tool UI -->
+        <h2 id="tool-title" class="visually-hidden">Open and explore a CSV file</h2>
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Choose a CSV or TSV file or drop it here">
+          <label class="visually-hidden" for="file-input">Choose a CSV or TSV file</label>
+          <input class="dropzone__input" id="file-input" type="file" accept=".csv,.tsv,.tab,.txt,.psv,text/csv,text/tab-separated-values,text/plain" aria-describedby="dropzone-hint">
+          <svg class="dropzone__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zM4 9.5h16M4 14.5h16M9.5 9.5V20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          <p class="dropzone__title">Drop a CSV file here or <span class="link">choose a file</span></p>
+          <span class="btn btn--primary dropzone__btn" aria-hidden="true">Open CSV file</span>
+          <p class="dropzone__hint" id="dropzone-hint">CSV, TSV or TXT, even hundreds of thousands of rows. The file is read on this device and never uploaded.</p>
+        </div>
+
+        <div class="viewer-bar" id="toolbar" hidden>
+          <div class="viewer-bar__file">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            <span class="viewer-bar__name" id="file-name"></span>
+            <button class="btn btn--small btn--ghost" id="open-another" type="button">Open another file</button>
+          </div>
+          <div class="viewer-bar__controls">
+            <div class="field viewer-bar__search">
+              <label for="search">Search all columns <span class="kbd" aria-hidden="true">/</span></label>
+              <input type="search" id="search" placeholder="Type to search rows" autocomplete="off" spellcheck="false">
+            </div>
+            <div class="field viewer-bar__delim">
+              <label for="delimiter">Delimiter</label>
+              <select id="delimiter">
+                <option value="">Auto</option>
+                <option value=",">Comma ( , )</option>
+                <option value=";">Semicolon ( ; )</option>
+                <option value="&#9;">Tab</option>
+                <option value="|">Pipe ( | )</option>
+              </select>
+            </div>
+            <div class="viewer-bar__checks">
+              <label class="check"><input type="checkbox" id="has-header"> First row is header</label>
+              <label class="check"><input type="checkbox" id="decimal-comma"> Decimal comma (1.234,5)</label>
+            </div>
+          </div>
+          <div class="viewer-bar__actions">
+            <button class="btn btn--small" id="add-filter" type="button" aria-controls="filter-bar">+ Add filter</button>
+            <button class="btn btn--small" id="toggle-cols" type="button" aria-expanded="false" aria-controls="col-panel">Columns</button>
+            <button class="btn btn--small btn--primary" id="download-csv" type="button">Download view as CSV</button>
+          </div>
+          <div class="filter-bar" id="filter-bar" hidden></div>
+          <div class="col-panel" id="col-panel" hidden></div>
+        </div>
+
+        <div class="results" id="results" aria-live="polite"></div>
+
+        <div class="grid-wrap" id="grid-wrap" hidden>
+          <div class="grid" id="grid" role="grid" tabindex="0" aria-label="CSV rows. Use arrow keys to move between cells.">
+            <div class="grid__inner" id="grid-inner">
+              <div class="grid__head" id="grid-head" role="row"></div>
+              <div class="grid__body" id="grid-body" role="rowgroup"></div>
+            </div>
+          </div>
+          <p class="grid-empty" id="grid-empty" hidden>No rows match the search and filters.</p>
+          <p class="grid-help">Click a cell to see the whole row. <span class="kbd">/</span> search · arrows move · <span class="kbd">Esc</span> clears · <span class="kbd">Ctrl</span>/<span class="kbd">⌘</span>+<span class="kbd">C</span> copies the cell</p>
+        </div>
+
+        <aside class="drawer" id="drawer" aria-labelledby="drawer-title" hidden>
+          <div class="drawer__head">
+            <h3 id="drawer-title">Row</h3>
+            <button class="btn btn--small" id="copy-row" type="button">Copy row</button>
+            <button class="btn btn--small btn--ghost" id="close-drawer" type="button" aria-label="Close row details">✕</button>
+          </div>
+          <dl class="drawer__list" id="drawer-list"></dl>
+        </aside>
+        <div class="popover" id="col-pop" role="dialog" aria-labelledby="col-pop-title" hidden></div>
+        <!-- TOOL:END -->
+      </div>
+    </section>
+
+    <section class="container section" id="how" aria-labelledby="how-title">
+      <h2 id="how-title" class="section__title">How it works</h2>
+      <!-- HOW:START — three honest steps for this tool -->
+      <ol class="steps">
+        <li><strong>Open your CSV.</strong> Drop a CSV, TSV or TXT export on the page or pick it. It is parsed in a background worker on your device, with the delimiter, header row and text encoding detected for you.</li>
+        <li><strong>Explore the rows.</strong> Scroll smoothly through every row, click a header to sort, search all columns, add filters, hide columns and tap a cell to read the full row.</li>
+        <li><strong>Keep what you need.</strong> Copy a cell or a row, or download the current filtered and sorted view as a new CSV. The original file is never changed.</li>
+      </ol>
+      <!-- HOW:END -->
+    </section>
+
+    <section class="container section" id="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="section__title">Questions, answered</h2>
+      <!-- FAQ:START — 4 to 6 questions; keep the privacy, offline and AI answers -->
+      <details class="faq" open>
+        <summary>Are my files uploaded anywhere?</summary>
+        <p>No. Large CSV Viewer and Search runs entirely in your browser. Your file is read into memory on your device, parsed with JavaScript in a Web Worker, and never sent to a server. You can disconnect from the internet and it keeps working.</p>
+      </details>
+      <details class="faq">
+        <summary>How large a CSV file can it open?</summary>
+        <p>There is no row limit, so files with more than a million rows work as long as your device has the memory. Only the rows on screen are drawn, so scrolling stays smooth. A desktop browser usually handles a few hundred megabytes; for files over 300 MB you can open a preview of the first 100,000 rows instead, which is safer on phones.</p>
+      </details>
+      <details class="faq">
+        <summary>Why not just open the CSV in Excel?</summary>
+        <p>Spreadsheet apps stop at 1,048,576 rows and often change your data while opening it, for example dropping leading zeros from IDs or turning codes into dates. This viewer shows every value exactly as it is written in the file and never edits it.</p>
+      </details>
+      <details class="faq">
+        <summary>Is it really free?</summary>
+        <p>Yes. It is open source under the MIT license, with no account, no row limits and no ads. If it saves you a paid subscription, you can say thanks on Ko-fi.</p>
+      </details>
+      <details class="faq">
+        <summary>Does it work offline?</summary>
+        <p>Yes. After your first visit the page is cached by a service worker, so it loads without a connection. You can also install it from your browser's menu as an app.</p>
+      </details>
+      <details class="faq">
+        <summary>Was this written by AI?</summary>
+        <p>Yes. Large CSV Viewer and Search was generated by Claude Code from a written specification inside an automated pipeline, with a test suite that runs in a real browser. The full source is on GitHub, so you can read every line before you trust it with your files.</p>
+      </details>
+      <!-- FAQ:END -->
+    </section>
+
+    <section class="container section" id="support">
+      <div class="support-card">
+        <h2 class="section__title">Built by one person, given away for free</h2>
+        <p>Large CSV Viewer and Search is a free alternative to paid tools like ConvertCSV Viewer and Datablist online CSV viewers. If it earns a place in your bookmarks, a coffee keeps the updates coming.</p>
+        <a class="btn btn--kofi" href="https://ko-fi.com/leodavidai" rel="noopener">☕ Support Or on Ko-fi</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="site-footer__links">
+        <a href="https://github.com/turhe123/csv-viewer-local" rel="noopener">Source on GitHub</a> ·
+        <a href="https://github.com/turhe123/csv-viewer-local/issues" rel="noopener">Report a bug</a> ·
+        <a href="https://turhe123.github.io/web-tools/" rel="noopener">More free web tools</a> ·
+        <a href="https://ko-fi.com/leodavidai" rel="noopener">Ko-fi</a>
+      </p>
+      <p class="site-footer__disclosure"><strong>Built with AI.</strong> Large CSV Viewer and Search was written by Claude Code inside an automated pipeline from a plain-English spec, as a clean-room implementation: no code or assets from any commercial product. It runs entirely in your browser, makes no network requests except an anonymous, cookieless page-view count, and has had less human review than hand-written software. Bug reports and pull requests are welcome.</p>
+      <p class="site-footer__copy">© 2026 Or Davidai Bachar · MIT License · <span id="sw-status" class="sw-status" aria-live="polite"></span></p>
+    </div>
+  </footer>
+
+  <script type="module" src="site.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

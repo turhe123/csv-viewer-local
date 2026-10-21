@@ -1,0 +1,10 @@
+{
+  "name": "papaparse",
+  "version": "5.5.3",
+  "license": "MIT",
+  "entry": "vendor/papaparse/papaparse.min.js (classic script, global Papa)",
+  "sources": {
+    "papaparse.min.js": "https://cdn.jsdelivr.net/npm/papaparse@5.5.3/papaparse.min.js",
+    "LICENSE": "https://cdn.jsdelivr.net/npm/papaparse@5.5.3/LICENSE"
+  }
+}

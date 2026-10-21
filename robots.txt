@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /tests/
+
+Sitemap: https://turhe123.github.io/csv-viewer-local/sitemap.xml

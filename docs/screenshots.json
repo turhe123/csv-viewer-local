@@ -1,0 +1,34 @@
+[
+  {
+    "file": "01-desktop-light.png",
+    "caption": "Large CSV Viewer and Search in the browser, light theme",
+    "alt": "Large CSV Viewer and Search at 1440×900, light theme",
+    "width": 1440,
+    "height": 900,
+    "scheme": "light"
+  },
+  {
+    "file": "02-desktop-dark.png",
+    "caption": "Large CSV Viewer and Search in the browser, dark theme",
+    "alt": "Large CSV Viewer and Search at 1440×900, dark theme",
+    "width": 1440,
+    "height": 900,
+    "scheme": "dark"
+  },
+  {
+    "file": "03-phone-light.png",
+    "caption": "Large CSV Viewer and Search on a phone",
+    "alt": "Large CSV Viewer and Search at 390×844, light theme",
+    "width": 390,
+    "height": 844,
+    "scheme": "light"
+  },
+  {
+    "file": "04-phone-dark.png",
+    "caption": "Large CSV Viewer and Search on a phone, dark theme",
+    "alt": "Large CSV Viewer and Search at 390×844, dark theme",
+    "width": 390,
+    "height": 844,
+    "scheme": "dark"
+  }
+]

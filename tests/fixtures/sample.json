@@ -1,0 +1,24 @@
+{
+  "invoice": 1042,
+  "customer": {
+    "name": "Acme Example Ltd",
+    "email": "billing@example.test"
+  },
+  "items": [
+    {
+      "sku": "A-1",
+      "qty": 2,
+      "price": 25.0
+    },
+    {
+      "sku": "B-7",
+      "qty": 1,
+      "price": 1200.0
+    }
+  ],
+  "paid": false,
+  "tags": [
+    "sample",
+    "fictional"
+  ]
+}

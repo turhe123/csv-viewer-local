@@ -1,0 +1,10 @@
+invoice: 1042
+customer:
+  name: Acme Example Ltd
+  email: billing@example.test
+items:
+  - sku: A-1
+    qty: 2
+  - sku: B-7
+    qty: 1
+paid: false
