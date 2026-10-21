@@ -95,14 +95,19 @@ function parseWith(file, encoding, strict, delimiter, maxRows) {
         // +1 leaves room for a header row in preview mode.
         if (maxRows && sent + data.length > maxRows + 1) {
           data = data.slice(0, maxRows + 1 - sent);
+          sent += data.length;
+          self.postMessage({ type: 'rows', rows: data });
+          // Settle as truncated BEFORE aborting: papaparse calls complete() synchronously inside abort(),
+          // and complete() must not be allowed to report a full read for a preview.
           stopped = true;
+          settle({ truncated: true });
           parser.abort();
+          return;
         }
         sent += data.length;
         self.postMessage({ type: 'rows', rows: data });
-        if (stopped) settle({ truncated: true });
       },
-      complete() { settle({ truncated: false }); },
+      complete() { settle({ truncated: stopped }); },
       error(err) { if (!settled) { settled = true; reject(err); } },
     });
 
@@ -122,7 +127,7 @@ function parseWith(file, encoding, strict, delimiter, maxRows) {
         self.postMessage({ type: 'progress', done: Math.min(size, off + SLICE), total: size });
       }
       if (!stopped && listeners.end) listeners.end();
-      settle({ truncated: false });
+      settle({ truncated: stopped });
     })().catch((err) => { if (!settled) { settled = true; reject(err); } });
   });
 }

@@ -268,6 +268,34 @@ test.describe('Large CSV Viewer and Search', () => {
     expect((await visibleColumn(page, 0))[0]).toBe('sku');
   });
 
+  test('a file above the size limit can be previewed, and the preview stays a preview', async ({ page }) => {
+    const lines = ['id,value'];
+    for (let i = 1; i <= 120000; i++) lines.push(`${i},${i % 7}`);
+    const buffer = Buffer.from(lines.join('\n'));
+    // Lower the 300 MB threshold so a small fixture takes the big-file path.
+    await page.evaluate(() => import('./app.js').then((m) => m.setBigFileLimit(1024)));
+    await page.setInputFiles('#file-input', { name: 'big.csv', mimeType: 'text/csv', buffer });
+    const box = page.locator('.big-file');
+    await expect(box).toContainText('big.csv');
+    await box.getByRole('button', { name: 'Preview first 100,000 rows' }).click();
+    await expect(page.locator('#row-count')).toHaveText('100,000 rows (preview)');
+    await expect(page.locator('#stats')).toContainText('first 100,000 rows only');
+    await page.evaluate(() => { const g = document.getElementById('grid'); g.scrollTop = g.scrollHeight; });
+    await expect(page.locator('#grid-body .grid__row:not([hidden]) .grid__rn', { hasText: /^100000$/ })).toBeVisible();
+    expect((await visibleColumn(page, 0)).includes('100001')).toBe(false);
+
+    // Re-parsing (delimiter override) must not silently load the whole file.
+    await page.selectOption('#delimiter', ',');
+    await expect(page.locator('#row-count')).toHaveText('100,000 rows (preview)');
+    await expect(page.locator('#stats')).toContainText('first 100,000 rows only');
+
+    // Loading everything is still possible and is not marked as a preview.
+    await page.setInputFiles('#file-input', { name: 'big.csv', mimeType: 'text/csv', buffer });
+    await page.locator('.big-file').getByRole('button', { name: 'Load the whole file' }).click();
+    await expect(page.locator('#row-count')).toHaveText('120,000 rows');
+    await expect(page.locator('#stats')).not.toContainText('preview');
+  });
+
   test('__demo shows a finished, sorted and searched view', async ({ page }) => {
     await page.evaluate(() => window.__demo());
     await expect(page.locator('#row-count')).toHaveText('50,000 rows');

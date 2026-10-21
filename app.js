@@ -8,7 +8,7 @@ const ROW_H = 34;
 const POOL_MIN = 60;
 const OVERSCAN = 8;
 const MAX_SPACER = 8_000_000; // px; browsers cap element heights, larger views are scaled
-const BIG_FILE = 300 * 1024 * 1024;
+let BIG_FILE = 300 * 1024 * 1024; // bytes; tests lower it through setBigFileLimit()
 const PREVIEW_ROWS = 100_000;
 const ACCEPT_EXT = /\.(csv|tsv|tab|txt|psv|dat)$/i;
 const ACCEPT_MIME = /^(text\/(csv|plain|tab-separated-values|x-csv)|application\/(csv|vnd\.ms-excel))$/i;
@@ -896,5 +896,8 @@ window.__demo = async () => {
   applyFilter();
   select(0, 2, { open: false, focus: false });
 };
+
+// Lets the test suite exercise the >300 MB preview path with a small fixture.
+export function setBigFileLimit(bytes) { BIG_FILE = bytes; }
 
 export { handleFiles };
